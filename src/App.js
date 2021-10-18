@@ -19,11 +19,11 @@ function App() {
   }, []);
   return (
     <div>
-      {!instructor&&!client && <a>Log In or Sign Up</a>}
-      {instructor||client && <a>Home</a>}
-      {instructor && <a>Classes I am Teaching</a>}
-      {client && <a>All Classes</a>}
-      {client && <a>Classes I am Attending</a>}
+      {!instructor&&!client && <Link>Log In or Sign Up</Link>}
+      {instructor||client && <Link>Home</Link>}
+      {instructor && <Link>Classes I am Teaching</Link>}
+      {client && <Link>All Classes</Link>}
+      {client && <Link>Classes I am Attending</Link>}
       {instructor && <button>Be a Client</button>}
     </div>
 
