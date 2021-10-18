@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 function App() {
   const [date, setDate] = useState(null);
 
-  const instructor, client = false; //TEMP CODE, PLEASE DELETE
+  const instructor = false; //TEMP CODE, PLEASE DELETE
+  const client = false; //TEMP CODE, PLEASE DELETE
 
   useEffect(() => {
     async function getDate() {
