@@ -1,21 +1,36 @@
-![React Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/react.svg)
+Roles
 
-# React Example
+"role_id": 1 = "client"
+"role_id": 2 = "instructor"
 
-This directory is a brief example of a [React](https://reactjs.org/) app with [Serverless Functions](https://vercel.com/docs/v2/serverless-functions/introduction) that can be deployed with Vercel and zero configuration.
+Endpoints
 
-## Deploy Your Own
+[GET] https://anywherefitnessbuild.herokuapp.com/api/auth/users
 
-Deploy your own React project, along with Serverless Functions, with Vercel.
+returns array of user objects on the db
+[
+{
+"user_id": 1,
+"username": "Mason",
+"password": "$2a$08$W/im5FlvQPQr7f.4ykM01eyGXGXwZGYBa9VvYTTOenlSHWPnoCEo2",
+"role_id": 2
+}
+]
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app-functions&template=create-react-app)
+[POST] https://anywherefitnessbuild.herokuapp.com/api/auth/register
 
-_Live Example: https://create-react-app.now-examples.now.sh/_
+returns new user object
+{
+"user_id": 3,
+"username": "Allison",
+"password": "$2a$08$wNp1GSzBkvnMbWl7Qynd0OwxWpnf9p1Geb4qjOWJ6b6T7crjQleZe",
+"role_id": 1
+}
 
-### How We Created This Example
+[POST] https://anywherefitnessbuild.herokuapp.com/api/auth/login
 
-To get started with React, along with [Serverless Functions](https://vercel.com/docs/v2/serverless-functions/introduction), with Vercel, you can use the [Create-React-App CLI](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) to initialize the project:
-
-```shell
-$ npx create-react-app my-app
-```
+returns Welcome back message with users name and custom token
+{
+"message": "Welcome back Allison!",
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsbGlzb24iLCJpYXQiOjE2MzQ2NTc3MjAsImV4cCI6MTYzNDc0NDEyMH0.MVzImHV78JjTVUIix5IrV05dZURqJpiBGdl9BcHG4sE"
+}
