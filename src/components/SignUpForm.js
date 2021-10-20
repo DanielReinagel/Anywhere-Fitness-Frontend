@@ -1,4 +1,3 @@
-/*
 import React, { useState } from 'react';
 import * as yup from 'yup';
 
@@ -35,11 +34,30 @@ function SignUpForm(props) {
   const onChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    yup
+    if(name==='confirmPw'){
+      if(formData.password===value){
+        setFormErrors({ ...formErrors, [name]: ''});
+        setCurrentError(formErrors.username ? formErrors.username : formErrors.role_id ? formErrors.role_id : formErrors.password);
+      } else {
+        setFormErrors({ ...formErrors, [name]:value ? 'The passwords must be the same' : initialFormErrors[name]});
+        setCurrentError(value ? 'The passwords must be the same' : initialFormErrors[name]);
+      }
+    } else {
+      if(name==='password'){
+        if(formData.confirmPw===value){
+          setFormErrors({ ...formErrors, confirmPw: ''});
+          setCurrentError(formErrors.username ? formErrors.username : formErrors.role_id ? formErrors.role_id : formErrors.password);
+        } else {
+          setFormErrors({ ...formErrors, confirmPw:value ? 'The passwords must be the same' : initialFormErrors['confirmPw']});
+          setCurrentError(value ? 'The passwords must be the same' : initialFormErrors['confirmPw']);
+        }
+      }
+      yup
       .reach(schema, name)
       .validate(value)
-      .then(() => {setFormErrors({ ...formErrors, [name]: "" }); setCurrentError(name==='email' ? formErrors.password : formErrors.email)})
+      .then(() => {setFormErrors({ ...formErrors, [name]: "" }); setCurrentError(name!=='username'&&formErrors.username ? formErrors.username : name!=='role_id'&&formErrors.role_id ? formErrors.role_id : name!=='password'&&formErrors.password ? formErrors.password : formErrors.confirmPw);})
       .catch((err) => {setFormErrors({ ...formErrors, [name]: err.errors[0] }); setCurrentError(err.errors[0]);});
+    }
   };
 
   return (
@@ -64,6 +82,15 @@ function SignUpForm(props) {
         />
       </label>
       <label>
+        Confirm Password:
+        <input
+          type="password"
+          name="confirmPw"
+          value={formData.confirmPw}
+          onChange={onChange}
+        />
+      </label>
+      <label>
         Role:
         <select>
           <option name='role_id' value={1}>Client</option>
@@ -78,4 +105,3 @@ function SignUpForm(props) {
 }
 
 export default SignUpForm;
-*/
