@@ -10,6 +10,7 @@ const ClientClasses = () => {
 
   return (
   <div>
+    <h2>The classes you are attending</h2>
     <Classes classes={classes}/>
   </div>
   );

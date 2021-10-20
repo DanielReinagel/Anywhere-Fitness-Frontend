@@ -10,6 +10,7 @@ const InstructorClasses = () => {
 
   return (
   <div>
+    <h2>Classes you are teaching</h2>
     <Classes classes={classes}/>
   </div>
   );

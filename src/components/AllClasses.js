@@ -11,7 +11,8 @@ const AllClasses = () => {
 
   return (
   <div>
-    <input type='text' id='searchbar'/>
+    <h2>Classes</h2>
+    <input type='text' id='searchbar' placeholder='search'/>
     <Classes classes={classes}/>
   </div>
   );
