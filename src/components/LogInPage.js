@@ -9,7 +9,7 @@ import Button from '../components/Button';
 const LogInPage = () => {
   return (
     <EntryPage>
-      <PageHeader to='/'>ANYWHERE FITNESS</PageHeader>
+      <PageHeader to='/home'>ANYWHERE FITNESS</PageHeader>
       <EntryCard>
         <h2>Log In</h2>
         <form onSubmit={(e) => e.preventDefault()}>
