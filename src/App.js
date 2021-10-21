@@ -12,8 +12,10 @@ import ClientClasses from "./components/ClientClasses";
 
 function App() {
   const [date, setDate] = useState(null);
+  const [role, setRole] = useState(localStorage.getItem("role_id"));
 
-  const role = localStorage.getItem("role_id");
+  const refreshRole = () => setRole(localStorage.getItem('role_id'));
+  
 
   useEffect(() => {
     async function getDate() {
@@ -40,7 +42,7 @@ function App() {
       <div>
         <Switch>
           <PrivateRoute go={!role} path="/login">
-            <LogInPage />
+            <LogInPage refreshRole={refreshRole} />
           </PrivateRoute>
           <PrivateRoute go={!!role} path="/home">
             <HomePage />
@@ -58,7 +60,7 @@ function App() {
             <ClientClasses />
           </PrivateRoute>
           <Route path="/">
-            {role ? <HomePage /> : <LogInPage />}
+            {role ? <HomePage /> : <LogInPage refreshRole={refreshRole}/>}
           </Route>
         </Switch>
       </div>

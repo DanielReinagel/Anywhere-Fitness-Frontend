@@ -7,7 +7,7 @@ const initialFormData = {
   password: ""
 };
 
-function LogInForm(props) {
+function LogInForm({refreshRole}) {
   const [formData, setFormData] = useState(initialFormData);
   const [displayError, setDisplayError] = useState(false);
   const [currentError, setCurrentError] = useState("");
@@ -22,6 +22,7 @@ function LogInForm(props) {
         localStorage.setItem('user_id', resp.data.user_id);
         localStorage.setItem('role_id', resp.data.role_id);
         localStorage.setItem('username', formData.username);
+        refreshRole();
         push('/home');
       })
       .catch(err => {
