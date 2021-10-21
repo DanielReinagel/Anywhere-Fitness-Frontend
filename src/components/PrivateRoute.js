@@ -1,8 +1,12 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({children, ...rest}) => {
-  return (<Route {...rest}>{children}</Route>);
+const PrivateRoute = ({go, children, ...rest}) => {
+  return (
+    <>
+      {go ? <Route {...rest}>{children}</Route> : <Redirect to='/'/>}
+    </>
+    );
 }
 
 export default PrivateRoute;
