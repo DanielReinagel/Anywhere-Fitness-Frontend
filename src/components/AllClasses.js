@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Classes from './Classes';
+import axiosWithAuth from '../functions/axiosWithAuth';
 
 const AllClasses = () => {
   const [ classes, setClasses ] = useState([]);
 
 
   useEffect(()=>{
-    //axios set classes
+    axiosWithAuth().get('https://anywherefitnessbuild.herokuapp.com/api/classes')
+      .then(resp => setClasses(resp.data))
+      .catch(err => console.log(err));
   }, []);
 
   return (

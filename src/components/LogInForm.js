@@ -1,38 +1,37 @@
 import React, { useState } from 'react';
-import * as yup from 'yup';
-
-const schema = yup.object().shape({
-  username: yup.string().required('A username is required'),
-  password: yup.string().required('A password is required')
-});
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const initialFormData = {
   username: "",
   password: ""
 };
-const initialFormErrors = {
-  username: "A username is required",
-  password: "A password is required"
-};
 
 function LogInForm(props) {
   const [formData, setFormData] = useState(initialFormData);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [displayError, setDisplayError] = useState(false);
-  const [currentError, setCurrentError] = useState(initialFormErrors.username);
+  const [currentError, setCurrentError] = useState("");
+
+  const { push } = useHistory();
   
   const onSubmit = event => {
     event.preventDefault();
-    // More code
+    axios.post('https://anywherefitnessbuild.herokuapp.com/api/users/login', {...formData})
+      .then(resp => {
+        localStorage.setItem('token', resp.data.token);
+        localStorage.setItem('user_id', resp.data.user_id);
+        localStorage.setItem('role_id', resp.data.role_id);
+        localStorage.setItem('username', formData.username);
+        push('/home');
+      })
+      .catch(err => {
+        setCurrentError(err.response.data.message);
+        setDisplayError(true);
+      })
   }
   const onChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    yup
-      .reach(schema, name)
-      .validate(value)
-      .then(() => {setFormErrors({ ...formErrors, [name]: "" }); setCurrentError(name==='username' ? formErrors.password : formErrors.username)})
-      .catch((err) => {setFormErrors({ ...formErrors, [name]: err.errors[0] }); setCurrentError(err.errors[0]);});
   };
 
   return (
