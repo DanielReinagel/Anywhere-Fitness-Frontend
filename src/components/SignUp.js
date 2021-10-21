@@ -19,6 +19,10 @@ const SignUpPage = () => {
                     </InputGroup>
                     <InputGroup>
                         <label htmlFor='signup-email'>Email Address</label>
+                        <Input type='text' placeholder='Email' id='signup-email' />
+                    </InputGroup>
+                    <InputGroup>
+                        <label htmlFor='signup-password'>Password</label>
                         <Input type='password' placeholder='Password' id='signup-password' />
                     </InputGroup>
                     <Button type='submit' full>Sign Up</Button>
