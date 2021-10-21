@@ -27,6 +27,9 @@ function App() {
   }, []);
   return (
     <>
+      <div style={{
+        backgroundImage: `url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80')`
+      }}></div>
       <div>
         {/* {!instructor && !client && <Link to="/login">Log In or Sign Up</Link>} */}
         {instructor || (client && <Link to="/home">Home</Link>)}
