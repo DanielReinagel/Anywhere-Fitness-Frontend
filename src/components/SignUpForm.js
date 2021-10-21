@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const schema = yup.object().shape({
   username: yup.string().required('A username is required'),
@@ -22,17 +23,18 @@ const initialFormErrors = {
   role_id: ""
 };
 
-function SignUpForm(props) {
+function SignUpForm({refreshRole}) {
   const [formData, setFormData] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [displayError, setDisplayError] = useState(false);
   const [currentError, setCurrentError] = useState(initialFormErrors.username);
   
+  const { push } = useHistory();
+
   const onSubmit = event => {
     event.preventDefault();
     schema.isValid(formData).then((valid) => {
       if (valid) {
-        console.log(formData);
         axios.post('https://anywherefitnessbuild.herokuapp.com/api/users/register', {username:formData.username, password:formData.password, role_id:formData.role_id})
           .then(() => {
             axios.post('https://anywherefitnessbuild.herokuapp.com/api/users/login', {username:formData.username, password:formData.password})
@@ -41,11 +43,11 @@ function SignUpForm(props) {
                 localStorage.setItem('user_id', resp.data.user_id);
                 localStorage.setItem('role_id', resp.data.role_id);
                 localStorage.setItem('username', formData.username);
+                refreshRole();
                 push('/home');
             })
           })
           .catch(err => {
-            console.log(err, err.response);
             setCurrentError(err.response.data.message);
             setDisplayError(true);
           })
