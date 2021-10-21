@@ -13,8 +13,7 @@ import ClientClasses from "./components/ClientClasses";
 function App() {
   const [date, setDate] = useState(null);
 
-  const instructor = false; //TEMP CODE, PLEASE DELETE
-  const client = false; //TEMP CODE, PLEASE DELETE
+  const role = localStorage.getItem("role_id");
 
   useEffect(() => {
     async function getDate() {
@@ -24,40 +23,42 @@ function App() {
     }
     getDate();
   }, []);
+
+  console.log(role);
   return (
     <>
       <div>
-        {!instructor && !client && <Link to="/login">Log In or Sign Up</Link>}
-        {instructor || (client && <Link to="/home">Home</Link>)}
-        {instructor && (
+        {!role && <Link to="/login">Log In or Sign Up</Link>}
+        {role && <Link to="/home">Home</Link>}
+        {role==='1' && (
           <Link to="/instructorclasses">Classes I am Teaching</Link>
         )}
-        {client && <Link to="/classes">All Classes</Link>}
-        {client && <Link to="/clientclasses">Classes I am Attending</Link>}
-        {instructor && <button>Be a Client</button>}
+        {role==='2' && <Link to="/classes">All Classes</Link>}
+        {role==='2' && <Link to="/clientclasses">Classes I am Attending</Link>}
+        {role==='1' && <button>Be a Client</button>}
       </div>
       <div>
         <Switch>
-          <PrivateRoute path="/login">
+          <PrivateRoute go={!role} path="/login">
             <LogInPage />
           </PrivateRoute>
-          <PrivateRoute path="/home">
+          <PrivateRoute go={!!role} path="/home">
             <HomePage />
           </PrivateRoute>
-          <PrivateRoute path="/instructorclasses">
+          <PrivateRoute go={role==='1'} path="/instructorclasses">
             <InstructorClasses />
           </PrivateRoute>
-          <PrivateRoute path="/classes">
+          <PrivateRoute go={role==='2'} path="/classes">
             <AllClasses />
           </PrivateRoute>
-          <PrivateRoute path="/class/:id">
+          <PrivateRoute go={role} path="/class/:id">
             <ClassPage />
           </PrivateRoute>
-          <PrivateRoute path="/clientclasses">
+          <PrivateRoute go={role==='2'} path="/clientclasses">
             <ClientClasses />
           </PrivateRoute>
           <Route path="/">
-            {instructor || client ? <HomePage /> : <LogInPage />}
+            {role ? <HomePage /> : <LogInPage />}
           </Route>
         </Switch>
       </div>
