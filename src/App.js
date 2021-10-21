@@ -9,6 +9,7 @@ import InstructorClasses from "./components/InstructorClasses";
 import AllClasses from "./components/AllClasses";
 import ClassPage from "./components/ClassPage";
 import ClientClasses from "./components/ClientClasses";
+import SignUpPage from "./components/SignUp";
 
 function App() {
   const [date, setDate] = useState(null);
@@ -38,11 +39,14 @@ function App() {
       </div>
       <div>
         <Switch>
+          <PrivateRoute path="/home">
+            <HomePage />
+          </PrivateRoute>
           <PrivateRoute path="/login">
             <LogInPage />
           </PrivateRoute>
-          <PrivateRoute path="/home">
-            <HomePage />
+          <PrivateRoute path="/signup">
+            <SignUpPage />
           </PrivateRoute>
           <PrivateRoute path="/instructorclasses">
             <InstructorClasses />
@@ -64,3 +68,5 @@ function App() {
     </>
   );
 }
+
+export default App;
