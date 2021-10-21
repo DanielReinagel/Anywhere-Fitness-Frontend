@@ -9,9 +9,11 @@ const ClientClasses = () => {
 
   useEffect(()=>{
     if(user_id){
-      axiosWithAuth().get();
+      axiosWithAuth().get(`https://anywherefitnessbuild.herokuapp.com/api/users/${user_id}/classes`)
+        .then(resp => setClasses(resp.data))
+        .catch(err => console.log(err, err.response));
     } else {
-      console.log('User Id Not Found in localStorage')
+      console.log('User ID Not Found in localStorage')
     }
   }, []);
 
