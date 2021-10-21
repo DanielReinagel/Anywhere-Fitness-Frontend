@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <div>
-        {!instructor && !client && <Link to="/login">Log In or Sign Up</Link>}
+        {/* {!instructor && !client && <Link to="/login">Log In or Sign Up</Link>} */}
         {instructor || (client && <Link to="/home">Home</Link>)}
         {instructor && (
           <Link to="/instructorclasses">Classes I am Teaching</Link>
