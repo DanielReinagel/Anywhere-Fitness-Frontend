@@ -10,7 +10,7 @@ const SignUpPage = () => {
                 <Link to='/login'> Log In</Link>
             </span>
             <br />
-            <span>Go back <Link to='/'>Home</Link></span>
+            <span>Go back <Link to='/home'>Home</Link></span>
         </>
     );
 }
