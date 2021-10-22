@@ -37,7 +37,8 @@ function App() {
         )}
         {role==='2' && <Link to="/classes">All Classes</Link>}
         {role==='2' && <Link to="/clientclasses">Classes I am Attending</Link>}
-        {role==='1' && <button>Be a Client</button>}
+        {role==='1' && <button onClick={()=>{localStorage.setItem('role_id', '2'); refreshRole();}}>Be a Client</button>}
+        {role && <button onClick={()=>{localStorage.clear(); refreshRole();}}>Logout</button>}
       </div>
       <div>
         <Switch>
